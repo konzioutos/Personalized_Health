@@ -1,0 +1,28 @@
+.error {
+    color: red;
+}
+
+.success {
+    color: green;
+}
+
+div.ex1 {
+  display: none;
+}
+div.ex2 {
+  display: inline;
+}
+div.ex3 {
+  display: block;
+}
+div.ex4 {
+  display: inline-block;
+}
+
+#doctor-info-div {
+  display: none;
+}
+
+#specialty {
+  display: none;
+}

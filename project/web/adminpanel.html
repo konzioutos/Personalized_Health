@@ -1,0 +1,124 @@
+<!DOCTYPE html>
+<!--
+To change this license header, choose License Headers in Project Properties.
+To change this template file, choose Tools | Templates
+and open the template in the editor.
+-->
+<html>
+    <head>
+        <title>Admin Panel</title>
+        <meta charset="UTF-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/css/bootstrap.min.css">
+        <link rel="stylesheet" href="css/panelstyle.css">
+        <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+        <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/js/bootstrap.min.js"></script>
+        <script src="js/myscript.js"></script>
+        <script type="text/javascript" src="https://www.gstatic.com/charts/loader.js"></script>
+    </head>
+    <body>   
+        <div id="header-container" class="container-fluid">&nbsp;</div>
+        <div id="login-form-container" class="container-fluid">
+            <div class="row">
+                <div id="loginform-div" class="col-lg-12">
+                    <header>
+                        <div class="jumbotron text-center">
+                            <h1><strong><em>Login Form</em></strong></h1>
+                        </div>
+                    </header>
+                    <form id="loginForm" name="loginForm">
+                        <label for="username">username:</label><br>
+                        <input type="text"  id="username" name="username" required><br>
+                        <label for="password">password:</label><br>
+                        <input type="password"  name="password" id="password" required><br>
+                        <div class="form-group">
+                            <label for="sel1">User Type:</label>
+                            <select class="form-control" id="login-sel" name="login-usertype">
+                                <option value="login-user" selected>Simple User</option>
+                                <option value="login-doctor">Doctor</option>
+                                <option value="login-admin">Administrator</option>
+                            </select>
+                            
+                            
+                        </div>
+                    </form>
+                    <br>
+                    <button type="button" class="btn btn-default" onclick="login()">Login</button>
+                    <a href="form.html" target="_blank" role="button" class="btn btn-default">Register</a>
+                    <div>
+                        <br>
+                        <button class="btn btn-default" type="button" onclick="find_docs()">Find doctors</button>
+                        <div id="visitor-content-div"></div>
+                    </div>
+
+                </div>
+                    
+                    <div id="error"></div>
+                </div>
+            </div>
+                  
+        <div id="loggedin-container" class="container-fluid" hidden >
+            <div class="row">
+                <div id="options-div" class="col-lg-4">
+                    
+                    <h3>Options</h3>
+                    <button class="btn btn-primary" type="button" onclick="getAdminContent('getusers')"> View Users</button>
+                    <button class="btn btn-primary" type="button" onclick="getAdminContent('certifydoctors')"> Certify Doctors</button>
+                    <button class="btn btn-danger" type="button" onclick="logout()">Logout</button>
+                </div>
+                <div id="content-div" class="col-lg-8">
+                    <h3>Content</h3>
+                    <div id="content-div-elements"></div>
+                </div>
+            </div>
+        </div>
+        
+        <div id="doctor-loggedin-container" class="container-fluid" hidden >
+            <div class="row">
+                <div id="doc-options-div" class="col-lg-4">
+                    <h3>Options</h3>
+                    <a href="editdetails.html" class="btn btn-default" role="button">Edit data</a>
+                    <button class="btn btn-default" type="button" onclick="manageRendezvous()">Manage rendezvous</button>
+                    <button class="btn btn-default" type="button" onclick="showMessages('user_id')">Messages</button>
+                    <button class="btn btn-danger" type="button" onclick="logout()">Logout</button>
+                    
+                </div>
+                <div id="doc-content-div" class="col-lg-6">
+                    <h3>Content</h3>
+                </div>
+            </div>      
+        </div>
+        
+        <div id="simpleUser-loggedin-container" class="container-fluid" hidden >
+            <div class="row">
+                <div id="simleUser-options-div" class="col-lg-4">
+                    <h3>Options</h3>
+                    <a href="editdetails.html" class="btn btn-default" role="button">Edit data</a>
+                    <button class="btn btn-default" type="button" onclick="stateHealth()">Show state of health</button>
+                    <button class="btn btn-default" type="button">Medical examination entry</button>
+                    <button class="btn btn-default" type="button">Compare examinations and treatment</button>                    
+                    <button class="btn btn-default" type="button">New treatment registration</button>
+                    <button class="btn btn-default" type="button">Find doctors</button>
+                    <button class="btn btn-default" type="button" onclick="showMessages('doctor_id')">Messages</button>
+                    <button class="btn btn-danger" type="button" onclick="logout()">Logout</button>
+                    
+                </div>
+                <div id="simpleUser-content-div" class="col-lg-8">
+                    <h3>Content</h3>
+                </div>
+            </div>     
+        </div>
+       
+
+    <footer>
+        <br><br><br><br>
+        <a href="https://www.vrisko.gr/efimeries-farmakeion/irakleio" target="_blank"><img src="https://www.vrisko.gr/graphlink/Pharmacies/image/160x60_Banner_n/?Region=irakleio&SmallRegion=true&NativeRegion=%ce%97%cf%81%ce%ac%ce%ba%ce%bb%ce%b5%ce%b9%ce%bf&" border="0" alt="Εφημερεύοντα Φαρμακεία Ηράκλειο" /></a>
+        <a href="https://www.vrisko.gr/efimeries-nosokomeion?SelectedCity=hrakleio" target="_blank"><img src="https://www.vrisko.gr/graphlink/Hospitals/image/160x60_Banner_n/?Prefecture=hrakleio&SmallPrefecture=true&NativePrefecture=%ce%97%ce%a1%ce%91%ce%9a%ce%9b%ce%95%ce%99%ce%9f&" border="0" alt="Εφημερεύοντα Νοσοκομεία ΗΡΑΚΛΕΙΟ" /></a>
+        <a href="https://www.ekab.gr/files/entypa/EKAB-protes-voithies.pdf" target="_blank"role="button" class="btn btn-default">First Aid</a>
+        <a href="https://www.venizeleio.gr/" target="_blank"role="button" class="btn btn-default">Venizeleio</a>
+        <a href="https://www.pagni.gr/" target="_blank"role="button" class="btn btn-default">Pagni</a>
+        <a href="https://www.pagni.gr/" target="_blank"role="button" class="btn btn-default">https://covid19.gov.gr/</a>       
+    </footer>         
+    </body>
+    
+</html>

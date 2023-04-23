@@ -1,0 +1,25 @@
+th, td {
+    padding: 5px;
+}
+
+.error {
+    color: red;
+}
+
+.success {
+    color: green;
+}
+
+#header-container {
+    background-image: url("../images/healthdna.jpg");
+    margin-bottom: 10px;
+    height: 120px;
+}
+
+#doc-content-div {
+    margin-top: 40px;
+}
+
+#simpleUser-content-div {
+    margin-top: 40px;
+}
